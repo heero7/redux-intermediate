@@ -4,11 +4,23 @@ const URL_ROOT = "http://localhost:3004";
 export function getCars(searchItem) {
   const request = fetch(`${URL_ROOT}/carsIndex?q=${searchItem}`, {
     method: "GET"
-  });
+  })
+  .then(res => res.json());
 
   return {
     type: "SEARCH_CARS",
     payload: request
   };
-  //console.log(`${URL_ROOT}/carsIndex?q=${searchItem}`);
+}
+
+export function carDetail(id){
+  const request = fetch(`${URL_ROOT}/carsIndex?id=${id}`, {
+    method: "GET"
+  })
+  .then(res => res.json());
+
+  return {
+    type: 'CAR_DETAIL',
+    payload: request
+  }
 }
