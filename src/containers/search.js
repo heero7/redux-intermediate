@@ -1,4 +1,11 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+
+// connect to redux
+import { connect } from 'react-redux';
+
+// import action creator
+import { getCars } from '../actions';
 
 class Search extends Component {
 
@@ -11,7 +18,13 @@ class Search extends Component {
 
     searchCars = (event) => {
         event.preventDefault();
-        console.log(this.state);
+        //console.log(this.state); log what is input
+
+        /*
+            Function is available in props because of
+            mapDispatchToProps.
+        */
+        this.props.getCars(this.state.keyword);
     }
 
     handleChange = (event) => {
@@ -40,4 +53,13 @@ class Search extends Component {
     }
 }
 
-export default Search;
+/**
+ * Dispatch an action, peform
+ * a defined action. In this case
+ * use the getCars from actions/index
+ */
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({getCars}, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(Search);
