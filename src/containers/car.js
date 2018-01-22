@@ -4,6 +4,11 @@ import { carDetail } from '../actions';
 import { bindActionCreators } from 'redux';
 
 class Car extends Component {
+
+    componentWillMount() {
+        this.props.carDetail(this.props.match.params.id);
+    }
+
     render() {
         return (
             <div>
@@ -14,8 +19,9 @@ class Car extends Component {
 }
 
 function mapStateToProps(state) {
+    console.log(state);
     return {
-        car: state.carDetail
+        carDetail: state.carDetail
     }
 }
 
