@@ -49,3 +49,18 @@ body {
 .car_item .right h6 {
     margin: 0;
 }
+
+/* Detail */
+
+.car_detail img {
+    width: 100%;
+}
+
+.car_detail h2,
+.car_detail h4 {
+    margin: 0;
+}
+
+.car_detail .content {
+    padding: 10px;
+}

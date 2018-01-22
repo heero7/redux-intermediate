@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { carDetail } from '../actions';
+import { carDetail, clearDetail } from '../actions';
 import { bindActionCreators } from 'redux';
 
 class Car extends Component {
@@ -9,10 +9,30 @@ class Car extends Component {
         this.props.carDetail(this.props.match.params.id);
     }
 
+    componentWillUnmount() {
+        this.props.clearDetail();
+    }
+
+    renderDetail = ({detail}) => {
+        if (detail) {
+            return detail.map((item) => {
+                console.log(item.car);
+                return (
+                    <div key={item.id} className="car_detail">
+                        <img src={`/images/images/${item.image}`} alt={'car'}/>
+                        <h2>{item.model}</h2>
+                        <h4>{item.brand}</h4>
+                        <p>{item.description}</p>
+                    </div>
+                );
+            });
+        }
+    }
+
     render() {
         return (
             <div>
-                {this.props.match.params.id}
+                {this.renderDetail(this.props.cars)}
             </div>
         );
     }
@@ -21,12 +41,12 @@ class Car extends Component {
 function mapStateToProps(state) {
     console.log(state);
     return {
-        carDetail: state.carDetail
+        cars: state.cars
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({carDetail}, dispatch)
+    return bindActionCreators({carDetail, clearDetail}, dispatch)
 }
 
 export default connect (mapStateToProps, mapDispatchToProps)(Car);

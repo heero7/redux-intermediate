@@ -24,3 +24,10 @@ export function carDetail(id){
     payload: request
   }
 }
+
+export function clearDetail() {
+  return {
+    type: 'CLEAR_DETAIL',
+    payload: []
+  }
+}
